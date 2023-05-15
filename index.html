@@ -1,0 +1,203 @@
+<html>
+<head>
+<title>PS-Phive! (FOR PS4 6.72) v1.0 By Leeful</title>
+<link rel="stylesheet prefetch" href="files/style.css">
+<div id=ScrOverlay class=cacheUPDbg><pre id=cacheUPDtxt class=cacheUPDtext></pre><div id=CacheProgress><div id=CacheBar></div></div></div>
+<div id=Loader class=Loader></div>
+<script>
+if (window.applicationCache.status=='0'){ScrOverlay.style.display="block";Loader.innerHTML='<object type="text/html" data="files/installCache.html" style="width:265px; height:56px;"></object>';}
+function JBfail(){localStorage.failcount= ++localStorage.failcount;failCounter.innerHTML=localStorage.failcount;msgs.innerHTML = "Jailbreak failed! - Reboot your PS4 and try again.";alert("Jailbreak failed!\n Reboot your PS4 and try again.");}
+function JBpass(){
+localStorage.passcount= ++localStorage.passcount;passCounter.innerHTML=localStorage.passcount;
+cacheUPDtxt.innerHTML="Exploit Loaded Successfully";
+TargetMenu.style.left=-700;
+setTimeout(function(){TargetMenu.style.left=-40;},500);
+setTimeout(function(){TargetMenu.style.left=-700;},1000);
+setTimeout(function(){TargetMenu.style.left=-40;},1500);
+setTimeout(function(){TargetMenu.style.left=-700;},2000);
+setTimeout(function(){ScrOverlay.style.opacity="0";TargetMenu.style.left=-40;},2500);
+setTimeout(function(){ScrOverlay.style.display="none";},3500);
+//setTimeout(function(){GetInfo();},3600);
+}
+</script>
+<script src="files/common/exploit.js"></script>
+<script src="files/common/helpers.js"></script>
+<script src="files/common/malloc.js"></script>
+<script src="files/common/rop.js"></script>
+<script src="files/common/syscalls.js"></script>
+<script src="files/common/syscalls2.js"></script>
+<script src="files/jb.js"></script>
+<script>
+UA=navigator.userAgent.substring(navigator.userAgent.indexOf("6.72 (") + 28,navigator.userAgent.indexOf(") Apple"));
+
+function runJB(){
+ScrOverlay.style.display="block";CacheProgress.style.display="none";cacheUPDtxt.innerHTML="Loading Exploit, Please Wait ...";
+setTimeout(jailbreak,2000);
+}
+if (UA=="6.72"&&window.applicationCache.status!='0'){runJB();}
+</script>
+</head>
+<body>
+<div id=MenuSelection onmouseenter=SetMenuButton()>
+<div class=but2> Main </div>&nbsp;&nbsp;
+<div class=but0> Tools </div>&nbsp;&nbsp;
+<div class=but0> Backup </div>&nbsp;&nbsp;
+<div class=but0> Restore </div>&nbsp;&nbsp;
+<div class=but0> Dumper </div>&nbsp;&nbsp;
+<div class=but0> Spoof </div>&nbsp;&nbsp;
+<div class=but0> Game Mods </div>&nbsp;&nbsp;
+<div class=but0> Linux </div>
+</div>
+
+<div id=MenuContainer class=MenuContainer onclick=GetInfo()>
+
+<div id=MainMenu class=MenuClass style=display:block>
+<div  PL-Title="Main Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains payloads to exploit and run homebrew on <br>your 6.72 firmware PS4.<br>Other payloads that are frequently used can also be found here like FTP and Bin Loader." class="Box Icon">&#xf30f;</div
+><div PL-Title="GoldHEN v2.4b13" PL-Bin="pl_GoldHENb.bin"PL-Ver="v2.4b13 - By SiSTRo"                                       PL-Desc="Enable Homebrew, Enable Debug Settings, Enable Update Blocker,<br>Enable External HDD Support, PSVR Support via Firmware Spoof to v9.00, Remote PKG Installer Support, 7.xx External HDD Support,<br>Full Rest Mode Support, Debug Trophies Support, Enable UART,<br>Enable Blocked Screenshots, Enable Remote Play, Enable Persistent FTP on port 2121."  class="Box Icon"><img src="files/img/hen.svg"></div
+><div PL-Title="Linux 1GB VRAM"  PL-Bin="pl_Linux.bin"   PL-Ver="Gentoo kernel 5.3.7 - By mircoho"                          PL-Desc="Load a Linux Distribution from USB.<br><br>1GB VRAM" class="Box Icon"><img src="files/img/linux.svg"></div
+><div PL-Title="GoldHEN v2.3"    PL-Bin="pl_GoldHEN.bin" PL-Ver="v2.3 - By SiSTRo"                                          PL-Desc="Enable Homebrew, Enable Debug Settings, Enable Update Blocker,<br>Enable External HDD Support, PSVR Support via Firmware Spoof to v9.00, Remote PKG Installer Support, 7.xx External HDD Support,<br>Full Rest Mode Support, Debug Trophies Support, Enable UART,<br>Enable Blocked Screenshots, Enable Remote Play, Enable Persistent FTP on port 2121."  class="Box Icon"><img src="files/img/hen.svg"></div
+><div PL-Title="HEN v2.1.3"      PL-Bin="pl_HEN.bin"     PL-Ver="v2.1.3 - By SiSTRo / 6.72 Port By Joonie86"                PL-Desc="Enable Homebrew, Enable Debug Settings, Enable Update Blocker,<br>Enable External HDD Support, PSVR Support via Firmware Spoof to v9.00, Remote PKG Installer Support, 7.xx External HDD Support,<br>Full Rest Mode Support, Debug Trophies Support, Enable UART,<br>Enable Blocked Screenshots."  class="Box Icon"><img src="files/img/hen.svg"></div
+><div PL-Title="HEN v2.1.3b"     PL-Bin="pl_HENb.bin"    PL-Ver="v2.1.3b - By SiSTRo/Joonie86 - Mod By Leeful"              PL-Desc="Same as HEN 2.1.3 but this fixes the blank trophy issue for most people.<br>! If your PSVR is updated to the latest firmware version you cannot use this version of HEN but if your PSVR is on an earlier firmware version you can but you must turn on your PSVR 'before' running this."  class="Box Icon"><img src="files/img/hen.svg"></div
+><div PL-Title="Bin Loader"      PL-Bin="BINLOADER"      PL-Ver="v1.0 - By OpenOrbis"                                       PL-Desc="Loads a bin or elf file sent to the PS4 IP address on port 9021.<br>Netcat or Netcat GUI is recommended to send the files to the PS4." class="Box Icon">&#xf019;</div
+><div PL-Title="FTP Server"      PL-Bin="pl_FTP.bin"     PL-Ver="v1.3 - Original Version By xVortex / 6.72 Port By Al Azif" PL-Desc="A full access FTP server for the PS4.<br>Connect your FTP client to the IP address that the popup message tells you.<br>The FTP port number is 1337." class="Box Icon"><img src="files/img/ftp.svg"></div
+><div PL-Title="App2USB"         PL-Bin="pl_App2usb.bin" PL-Ver="v5.0 - Original Version By Stooged / 6.72 Port By Al Azif" PL-Desc="Move installed games from your internal HDD to an external <br>exFAT formatted USB drive.<br>Put app2usb.ini in a folder named PS4 on root of your USB drive.<br><br>" class="Box Icon">&#xf01c;</div
+><div PL-Title="FakeUSB"         PL-Bin="pl_FakeUSB.bin" PL-Ver="v1.0 - By Sleirsgoevy / Mod By Leeful"                     PL-Desc="Allow PKG's to be installed from the PS4's Internal HDD.<br>Useful if your USB drive is not large enough for a certain .pkg file.<br>1. Copy your .pkg files to /user/home/fakeusb/ via FTP.<br>2. Open Debug Settings > Game > Package > Package Installer.<br>3. Come back here and run FakeUSB.<br>Now Package Installer will see the PKG's on your internal HDD." class="Box Icon">&#xf079;</div
+></div>
+
+<div id=ToolsMenu class=MenuClass style=display:none>
+<div  PL-Title="Tools Menu"      PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains tools to do various tasks and change things on your PS4." class="Box Icon">&#xf30f;</div
+><div PL-Title="Fan Control"     PL-Bin="" PL-Ver="v4.0 - By Leeful"                                                               PL-Desc="Set the desired temperature that the PS4 fan starts.<br>You can move the slider by using the D-Pad Up & Down or Left & Right.<br>The value you set will remain until the power is removed from the PS4.<br><br>The default PS4 setting is 79&#176;" class="Box Icon"><img src="files/img/FanControl.svg"></div
+><div PL-Title="PS4Debug"        PL-Bin="pl_PS4debug.bin" PL-Ver="v1.2.1 - By GiantPluto"                                          PL-Desc="PS4Debug for SaveMounter and Profile Activator." class="Box Icon">&#xf188;</div
+><div PL-Title="Kernel Dumper"   PL-Bin="pl_KernelDumper.bin" PL-Ver="v1.0 - Original Version By Eversion / 6.72 Port By Al Azif"  PL-Desc="Dump a copy of your kernel to your USB drive.<br><br>Your kernel will be dumped to: KernelDump.bin on your USB drive." class="Box Icon">&#xf828;</div
+><div PL-Title="History Blocker" PL-Bin="pl_HistoryBlocker.bin" PL-Ver="v2.0 - Original Version By Stooged / 6.72 Port By Al Azif" PL-Desc="Disable the auto opening of the last page used in the PS4 WebBrowser.<br><br>Run the payload again to disable this feature." class="Box Icon">&#xf686;</div
+><div PL-Title="Disable Updates" PL-Bin="pl_UpdatesDisable.bin" PL-Ver="v1.0 - By Al Azif"                                         PL-Desc="Creates dummy files in the PS4 update folder to prevent the download of unwanted system updates.<br>It also deletes any existing updates if they already exist.<br><br>! You only ever have to run this once !" class="Box Icon">&#xf771;</div
+><div PL-Title="Enable Updates"  PL-Bin="pl_UpdatesEnable.bin" PL-Ver="v1.0 - By Al Azif"                                          PL-Desc="Removes the dummy files in the PS4 update folder to enable the download of updates again.<br><br>Run this if you have previously disabled updates and wish to update your console." class="Box Icon">&#xf772;</div
+></div>
+
+<div id=BackupMenu class=MenuClass style=display:none>
+<div  PL-Title="Backup Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains various payloads to backup all aspect of useful things on your PS4.<br><br>NOTE! These backups will only work on your current Profile and accountID!<br>If you plan to initialize or replace your HDD you must also make a backup of your existing profile using the official backup/restore app in system settings!" class="Box Icon">&#xf30f;</div
+><div PL-Title="Database Backup"      PL-Bin="pl_DBbackup.bin"           PL-Ver="v1.0 - By Leeful" PL-Desc="Create a backup of important database files.<br><br>A backup of your app databases will be created and saved internally on your PS4 HDD and also to USB if a USB drive is inserted." class="Box Icon">&#xf56e;</div
+><div PL-Title="Save Data Backup"     PL-Bin="pl_SaveDataBackup.bin"     PL-Ver="v1.0 - By Leeful" PL-Desc="Create a backup of all your current game Save data to a USB drive.<br><br>NOTE! This backup will only work on your current Profile and accountID!<br>If you plan to initialize or replace your HDD you must also make a backup of your existing profile using the official backup/restore app in system settings!" class="Box Icon">&#xf2f5;</div
+><div PL-Title="Trophy Backup"        PL-Bin="pl_TrophyBackup.bin"       PL-Ver="v1.0 - By Leeful" PL-Desc="Create a backup of your Trophy data to a USB drive.<br><br>NOTE! This backup will only work on your current Profile and accountID!<br>If you plan to initialize or replace your HDD you must also make a backup of your existing profile using the official backup/restore app in system settings!" class="Box Icon">&#xf091;</div
+><div PL-Title="Offline Cache Backup" PL-Bin="pl_OfflineCacheBackup.bin" PL-Ver="v1.0 - By Leeful" PL-Desc="Create a backup of your Offline Cache.<br><br>A backup of your ApplicationCache.db will be created to USB if a USB drive is inserted." class="Box Icon">&#xf0ed;</div
+><div PL-Title="Avatar Backup"        PL-Bin="pl_AvatarBackup.bin"       PL-Ver="v1.0 - By Leeful" PL-Desc="Create a backup of your profile Avatar images to a USB drive.<br><br>Files will be dumped to Avatar_Backup/0xProfileID folder on your USB drive." class="Box Icon">&#xf6e9;</div
+><div PL-Title="HDD Upgrade Backup"   PL-Bin="pl_HDD_Backup.bin"         PL-Ver="v1.0 - By Leeful" PL-Desc="Transfer all your saves and trophies if you are initializing or upgrading your HDD.<br><br>1. Use this payload to backup all your saves and trophies.<br>2. Use the official PS4 backup/restore app to BACKUP your profile.<br>3. Install your new HDD and recovery Firmware.<br>4. Use the official PS4 backup/restore app to RESTORE your profile.<br>5. Use the 'HDD Upgrade Restore' payload to restore all your data." class="Box Icon">&#xf311;</div
+></div>
+
+<div id=RestoreMenu class=MenuClass style=display:none>
+<div  PL-Title="Restore Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains various payloads to restore all aspect of useful things on your PS4." class="Box Icon">&#xf30f;</div
+><div PL-Title="Database Restore"      PL-Bin="pl_DBrestore.bin"           PL-Ver="v1.0 - By Leeful" PL-Desc="Restore a backup of the database files created by 'Database Backup'<br><br>The backup will be restored from either the Internal HDD or from USB if a USB drive is inserted.<br>If a USB drive is inserted, the backup on the USB will be the one used to restore." class="Box Icon">&#xf56f;</div
+><div PL-Title="Save Data Restore"     PL-Bin="pl_SaveDataRestore.bin"     PL-Ver="v1.0 - By Leeful" PL-Desc="Restore a backup of all your game Save data from a USB drive." class="Box Icon">&#xf2f6;</div
+><div PL-Title="Trophy Restore"        PL-Bin="pl_TrophyRestore.bin"       PL-Ver="v1.0 - By Leeful" PL-Desc="Restore a backup of your Trophy data from a USB drive." class="Box Icon">&#xf2eb;</div
+><div PL-Title="Offline Cache Restore" PL-Bin="pl_OfflineCacheRestore.bin" PL-Ver="v1.0 - By Leeful" PL-Desc="Restore a backup of your Offline Cache from USB.'<br><br><br>This can also be used to inject any ApplicationCache.db to your PS4. Just place the file in a folder named OfflineCache_Backup on your USB drive." class="Box Icon">&#xf0ee;</div
+><div PL-Title="Avatar Restore"        PL-Bin="pl_AvatarRestore.bin"       PL-Ver="v1.0 - By Leeful" PL-Desc="Restore a backup of your Avatar files to your PS4" class="Box Icon">&#xf809;</div
+><div PL-Title="HDD Upgrade Restore"   PL-Bin="pl_HDD_Restore.bin"         PL-Ver="v1.0 - By Leeful" PL-Desc="Transfer all your saves and trophies if you are initializing or upgrading your HDD.<br><br>1. Use the official PS4 backup/restore app to RESTORE the backup you made of your profile.<br>2. Use this payload to restore all save game and trophy data." class="Box Icon">&#xf310;</div
+></div>
+
+<div id=DumperMenu class=MenuClass style=display:none>
+<div  PL-Title="Game Dumper Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains payloads to dump games from your PS4 <br>so that you can then build your own fake packages that you can install." class="Box Icon">&#xf30f;</div
+><div PL-Title="Dump Game & Update"         PL-Bin="pl_DumperGU.bin" PL-Ver="v1.8 - Original Version By xVortex / 6.72 Port and Mod By Leeful" PL-Desc="Dump your games or apps to a USB drive to be able to create fpkg files.<br><br>This payload will dump your game and game update (if there is one) into two seperate folders on your USB drive.<br>No config file is needed with this payload!" class="Box Icon">&#xf1b3;</div
+><div PL-Title="Dump Game Only"             PL-Bin="pl_DumperG.bin"  PL-Ver="v1.8 - Original Version By xVortex / 6.72 Port and Mod By Leeful" PL-Desc="Dump your games or apps to a USB drive to be able to create fpkg files.<br><br>This payload will dump just your game on your USB drive.<br><br>No config file is needed with this payload!" class="Box Icon">&#xf1b2;</div
+><div PL-Title="Dump Update Only"           PL-Bin="pl_DumperU.bin"  PL-Ver="v1.8 - Original Version By xVortex / 6.72 Port and Mod By Leeful" PL-Desc="Dump your games or apps to a USB drive to be able to create fpkg files.<br><br>This payload will dump just your game update to your USB drive.<br><br>No config file is needed with this payload!" class="Box Icon">&#xf1b2;</div
+><div PL-Title="Dump & Merge Game + Update" PL-Bin="pl_DumperM.bin"  PL-Ver="v1.8 - Original Version By xVortex / 6.72 Port and Mod By Leeful" PL-Desc="Dump your games or apps to a USB drive to be able to create fpkg files.<br><br>This payload will dump your game and game update (if there is one) and merge them into one folder on your USB drive.<br>No config file is needed with this payload!" class="Box Icon">&#xf1b3;</div
+></div>
+
+<div id=SpoofMenu class=MenuClass style=display:none>
+<div  PL-Title="Spoof Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains payloads to spoof various things on your PS4." class="Box Icon">&#xf30f;</div
+><div PL-Title="Firmware Spoofer" PL-Bin=""                PL-Ver="v1.0 - By Leeful"     PL-Desc="Spoofs the PS4 firmware version to anything between 0.00 and 99.99<br><br>This is useful for spoofing the firmware to allow PSVR to work and for dev testing purposes but it WILL NOT allow higher firmware version games to be played on the PS4!!" class="Box Icon">&#xf661;</div
+><div PL-Title="To-DEX"           PL-Bin="pl_ToDEX.bin"    PL-Ver="v1.0 - By notzecoxao" PL-Desc="Converts your Target ID to (DEX)<br><br>Adds new options in the game info menu to uninstall just DLC or just game updates.<br>To remove debug features just reboot your console or run To-Retail." class="Box Icon">&#xf7f9;</div
+><div PL-Title="To-DEV"           PL-Bin="pl_ToDEV.bin"    PL-Ver="v1.0 - By notzecoxao" PL-Desc="Converts your Target ID to (DEV)<br><br>Adds new options in the game info menu to uninstall just DLC or just game updates.<br>To remove debug features just reboot your console or run To-Retail." class="Box Icon">&#xf7f9;</div
+><div PL-Title="To-Kratos"        PL-Bin="pl_ToKratos.bin" PL-Ver="v1.0 - By notzecoxao" PL-Desc="Converts your Target ID to (Kratos)<br><br>Adds new options in the game info menu to uninstall just DLC or just game updates.<br>To remove debug features just reboot your console or run To-Retail." class="Box Icon">&#xf7f9;</div
+><div PL-Title="To-Retail"        PL-Bin="pl_ToRetail.bin" PL-Ver="v1.0 - By Leeful"     PL-Desc="Converts your Target ID back to Retail (CEX)<br><br>Removes the To-DEX, To-DEV or To-Kratos functions." class="Box Icon">&#xf7f9;</div
+></div>
+
+<div id=ModMenu class=MenuClass style=display:none>
+<div  PL-Title="Game Mods Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains Mod Menus and Trainers for PS4 Games.<br><br>GTA V Mod Menus are compatable with different update versions of the game." class="Box Icon">&#xf30f;</div
+><div PL-Title="PS4 Trainer (WebRTE)"           PL-Bin="pl_WebRTE.bin"           PL-Ver="v1.0 - By PS4 Trainer"                                            PL-Desc="Run payload then go to ps4trainer.com/Trainer/index.html<br>on any device to use trainers." class="Box Icon">&#xf108;</div
+><div PL-Title="ArabicGuy Menu For GTA V v1.00" PL-Bin="pl_GTA_ArabicGuy100.bin" PL-Ver="v1.0 - Original Version By RF0oDxM0Dz / 6.72 PORT By Mustafa0436" PL-Desc="Mod Menu for GTA V<br>*Game version 1.00.<br><br>Activate Menu With: 'L1 + R1'" class="Box Icon">&#xf5e1;</div
+><div PL-Title="ArabicGuy Menu For GTA V v1.27" PL-Bin="pl_GTA_ArabicGuy127.bin" PL-Ver="v1.0 - Original Version By RF0oDxM0Dz / 6.72 PORT By GraFfiX420"  PL-Desc="Mod Menu for GTA V<br>*Game update v1.27 must be installed.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf5e1;</div
+><div PL-Title="ArabicGuy Menu For GTA V v1.32" PL-Bin="pl_GTA_ArabicGuy132.bin" PL-Ver="v1.0 - Original Version By RF0oDxM0Dz / 6.72 PORT By GraFfiX420"  PL-Desc="Mod Menu for GTA V<br>*Game update v1.32 must be installed.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf5e1;</div
+><div PL-Title="Lamance Menu For GTA V v1.32"   PL-Bin="pl_GTA_Lamance132.bin"   PL-Ver="v0.8.1 - By david1337hax"                                         PL-Desc="Mod Menu for GTA V<br>*Game update v1.32 must be installed.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf63b;</div
+></div>
+
+<div id=LinuxMenu class=MenuClass style=display:none>
+<div  PL-Title="Linux Menu" PL-Bin="INFO" PL-Ver="Menu Info:" PL-Desc="Contains Linux Loader payloads to run Linux on your PS4." class="Box Icon">&#xf30f;</div
+><div PL-Title="Linux 1GB VRAM" PL-Bin="pl_Linux.bin"  PL-Ver="Gentoo kernel 5.3.7 - By mircoho" PL-Desc="Load a Linux Distribution from USB.<br><br>1GB VRAM" class="Box Icon"><img src="files/img/linux.svg"></div
+><div PL-Title="Linux 3GB VRAM"  PL-Bin="pl_Linux2.bin" PL-Ver="Gentoo kernel 5.3.7 - By mircoho" PL-Desc="Load a Linux Distribution from USB.<br><br>3GB VRAM" class="Box Icon"><img src="files/img/linux.svg"></div
+></div>
+
+</div>
+
+<div id=navFix1 tabindex="6"></div>
+<div id=Title class=Title>HEN 2.1.3</div>
+<div id=Popup onclick="Popup.classList.remove('animation');"><div id="PopIcon"></div><div id="PopTitle"></div></div>
+<div id=BottomPopup></div>
+<div id=InfoBox style=display:none><div id=InfoTitle></div><div id=InfoVerAuth></div><div id=InfoDesc></div></div>
+<div id=msgs style=display:none class=LoadingTXT></div>
+<div id=FanTemp class=Info1></div>
+<div id=PassFail>Detected Firmware Version: v<span id=FWver></span><br>Exploit Stats:&nbsp; Pass = <span id=passCounter></span>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;Fail = <span id=failCounter></span></div>
+
+<script>
+var SS=sessionStorage;var LS=localStorage;var CC=createCookie;var RC=readCookie;function createCookie(name,value,days){if(days){var date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));var expires="; expires="+date.toGMTString();}else
+expires="";document.cookie=name+"="+value+expires;}
+function readCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')
+c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)
+return c.substring(nameEQ.length,c.length);}
+return null;}
+if(LS.passcount==null){LS.passcount=0;}
+passCounter.innerHTML=LS.passcount;if(LS.failcount==null){LS.failcount=0;}
+failCounter.innerHTML=LS.failcount;FWver.innerHTML=UA;if(LS.CurrentTemp==null){LS.CurrentTemp=79;}
+function ShowFanTemp(){FanTemp.style.display='block';FanTemp.innerHTML='Current Threshold Setting:<font color="yellow">'+LS.CurrentTemp+'&#176;</font>';}
+function HideFanTemp(){FanTemp.style.display='none';}
+if(sessionStorage.length==0){MenuNumber=1;SS.MenuNumber=MenuNumber;SS.ItemNum=2;SS.MenuPos=-40;MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";MenuStatus=1;Loaded=0;SS.ThisIsFanControl=0;SS.ThisIsFwSpoofer=0;}else{MenuNumber=SS.MenuNumber;MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";MenuStatus=1;Loaded=0;SS.ThisIsFanControl=0;SS.ThisIsFwSpoofer=0;}
+function UpdateSelectMenu(){var x=TargetMenu.childElementCount;for(i=0;i<x;i++){TargetMenu.children[i].className="Box Icon";}
+TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";ShowMenuInfo();SS.MenuNumber=MenuNumber;}
+function UpdateMenu(){setTimeout(function(){if(MenuStatus==1){TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";}else{TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";}},0);if(MenuStatus==1){TargetMenu.children[SS.ItemNum-1].className="SelectedItemAnim Icon";TargetMenu.style.left=SS.MenuPos+'px';}
+UpdateTitle();ShowInfo();var x=TargetMenu.childElementCount;for(i=0;i<x;i++){TargetMenu.children[i].className="Box Icon";}}
+function UpdateTitle(){Title.className="TitleAnim";setTimeout(function(){ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'));},100);setTimeout(function(){Title.className="Title";},100);setTimeout(function(){if(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')=='Fan Control'){ShowFanTemp();}else{HideFanTemp();}},100);}
+function HideTitle(){Title.className="NoTitle";}
+function getScript(source,callback){var gs=document.createElement('script');gs.src=source;gs.onload=callback;gs.async=false;document.body.appendChild(gs);}
+function loadScript(){getScript(JSfile,function(){LoadPL();});}
+function LoadPayload(){window.msgs.style='display:block;';Payload=TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title');PLfile="files/"+TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Bin');if(Payload=='HEN v2.1.3'||Payload=='HEN v2.1.3b'||Payload=='GoldHEN v2.3'||Payload=='GoldHEN v2.4b13'){JSfile="files/00_LoaderHEN.js";msgs.innerHTML="Loading "+Payload;LoadedMSG=Payload+" Loaded Successfully<br>Press The Circle Button To Exit";setTimeout(loadScript,100);}else if(Payload=='Bin Loader'){JSfile="files/00_LoaderBL.js";LoadedMSG="Send Payload To Port 9021";setTimeout(loadScript,100);}else if(Payload.includes("GTA V")){JSfile="files/00_LoaderPL.js";msgs.innerHTML="Loading "+Payload;LoadedMSG=Payload+" Loaded Successfully<br>Press The PS Button Then Load GTA V";setTimeout(loadScript,100);}else if(Title.innerHTML=='Credits'){ThisIsCredits='1';SS.LastPage='files/Credits.html';ScrOverlay.style.opacity="1";ScrOverlay.style.display="block";ScrOverlay.innerHTML='<object type="text/html" data="files/Credits.html"style="width:100%;height:100%;"></object>';}else if(PLfile.slice((PLfile.lastIndexOf(".")-1>>>0)+2)=="js"){JSfile="files/00_LoaderPL.js";msgs.innerHTML="Loading "+Payload+" Please Wait ...";LoadedMSG=Payload+" Loaded";function GetJS(){var script=document.createElement('script');script.src=PLfile;document.body.appendChild(script);}
+setTimeout(function(){(function(next){GetJS();next();}
+(function(){setTimeout(loadScript,500);}));},200);}else{JSfile="files/00_LoaderPL.js";LoadedMSG=Payload+" Loaded";setTimeout(loadScript,100);}}
+function loadPage(){MenuStatus=3;if(Title.innerHTML=='Fan Control'){Loaded='1';SS.ThisIsFanControl='1';SS.LastPage='files/FanControl.html';BottomPopup.innerHTML='<object type="text/html" data="files/FanControl.html" style="width:99%; height:200px;"></object>';var script=document.createElement('script');script.src="files/pl_Fanthresh.js";document.body.appendChild(script);}
+if(Title.innerHTML=='Firmware Spoofer'){Loaded='1';SS.ThisIsFwSpoofer='1';SS.LastPage='files/FwSpoof.html';BottomPopup.innerHTML='<object type="text/html" data="files/FwSpoof.html" style="width:99%; height:200px;"></object>';var script=document.createElement('script');script.src="files/pl_FWspoof.js";document.body.appendChild(script);}
+LoadPayload();}
+function loadPage2(){if(SS.ThisIsFanControl=='2'){window.msgs.style='display:block;';window.setTEMP();msgs.innerHTML="Setting Temp Threshold ...";LoadedMSG="Temp Threshold Set Successfully";var script=document.createElement('script');script.src="files/pl_Fanthresh2.js";document.body.appendChild(script);}
+if(SS.ThisIsFwSpoofer=='2'){window.msgs.style='display:block;';window.setFW();msgs.innerHTML="Spoofing Firmware Version ...";LoadedMSG="Firmware Version Spoofed";var script=document.createElement('script');script.src="files/pl_FWspoof2.js";document.body.appendChild(script);}}
+function ChangeText(text){Title.innerHTML=text;}
+function ChangeInfoBoxTitle(text){InfoTitle.innerHTML=text;}
+function ChangeInfoBoxVer(text){InfoVerAuth.innerHTML=text;}
+function ChangeInfoBoxDesc(text){InfoDesc.innerHTML=text;}
+IBT=ChangeInfoBoxTitle;IBV=ChangeInfoBoxVer;IBD=ChangeInfoBoxDesc;function pop(){Popup.classList.remove('animation');void Popup.offsetWidth;Popup.classList.add('animation');}
+function BottomPop(){BottomPopup.classList.add('animation');}
+function GetInfo(){if(Loaded==0&&TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Bin')!="INFO"){var x=document.querySelectorAll(".box");var i;for(i=0;i<x.length;i++){x[i].style.opacity="0";}
+InfoBox.style.display='block';Title.style.display='none';loadPage();}else{loadPage2();}}
+function ShowMenuInfo(){IBT(TargetMenu.children[0].getAttribute('PL-Title'));IBV(TargetMenu.children[0].getAttribute('PL-Ver'));IBD(TargetMenu.children[0].getAttribute('PL-Desc'));}
+function ShowInfo(){if(Title.innerHTML=='Fan Control'){};if(Title.innerHTML=='Firmware Spoofer'){};InfoBox.style.display='block';IBT(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'));IBV(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Ver'));IBD(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Desc'));}
+ShowInfo();function HideLoaderBox(){Loaded='1';setTimeout(function(){var x=document.querySelectorAll(".SelectedItem");var i;for(i=0;i<x.length;i++){x[i].className="InfoIcon Icon";}},1500);}
+function SelectionMenuOFF(){var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].removeAttribute("tabindex");}}
+function SelectionMenuON(){SelectionMenuOFF();function AllON(){var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].setAttribute("tabindex","1");}}
+MenuSelection.children[MenuNumber-1].setAttribute("tabindex","1");setTimeout(AllON,100);}
+function SetMenuButton(){var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].className="But0";}
+MenuSelection.children[MenuNumber-1].className="But2";}
+function SwapMenuR(){SS.ItemNum=2;SS.MenuPos=-40;MenuNumber=parseInt(SS.MenuNumber)+1;TargetMenu.style="display:none";var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].id="other";}
+MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');SetMenuButton();UpdateSelectMenu();TargetMenu.style="display:block";TargetMenu.style.left="-40px";}
+function SwapMenuL(){SS.ItemNum=2;SS.MenuPos=-40;MenuNumber=parseInt(SS.MenuNumber)-1;TargetMenu.style="display:none";var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].id="other";}
+MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');SetMenuButton();UpdateSelectMenu();TargetMenu.style="display:block";TargetMenu.style.left="-40px";}
+var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].style="display:none";}
+UpdateTitle();SetMenuButton();TargetMenu.style="display:block";TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";TargetMenu.style.left=SS.MenuPos+'px';window.onkeyup=checkKeyUp;function checkKeyUp(e){e=e||window.event;if(e.keyCode=='117'&&Loaded==0){}
+else if(e.keyCode=='116'&&Loaded==0){}}
+window.onkeydown=checkKeyDown;function checkKeyDown(e){e=e||window.event;var MoveMenu=110;if(e.keyCode=='27'&&ThisIsCredits==1){SS.removeItem('LastPage');ThisIsCredits=0;window.location.reload();}else if(e.keyCode=='117'&&Loaded==0){}
+else if(e.keyCode=='116'&&Loaded==0){}
+else if(SS.ThisIsFanControl!=0||SS.ThisIsFwSpoofer!=0){}
+else if(e.keyCode=='38'&&MenuStatus==1&&Loaded==0){MenuStatus=0;SelectionMenuON();TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";HideTitle();UpdateSelectMenu();ShowMenuInfo();HideFanTemp();}
+else if(e.keyCode=='40'&&MenuStatus==0&&Loaded==0){MenuStatus=1;SelectionMenuOFF();TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";UpdateTitle();ShowInfo();}
+else if(e.keyCode=='37'&&Loaded==0&&MenuStatus==0&&MenuNumber-1>=1&&MenuNumber<=MenuSelection.childElementCount){SwapMenuL();}
+else if(e.keyCode=='39'&&Loaded==0&&MenuStatus==0&&MenuNumber-1>=0&&MenuNumber<MenuSelection.childElementCount){SwapMenuR();}
+else if(e.keyCode=='37'&&MenuStatus==1&&SS.ItemNum-1>=1&&SS.ItemNum<=TargetMenu.childElementCount){SS.MenuPos=parseInt(SS.MenuPos)+MoveMenu;SS.ItemNum=parseInt(SS.ItemNum)-1;SelectionMenuOFF();UpdateMenu();}
+else if(e.keyCode=='39'&&MenuStatus==1&&SS.ItemNum-1>=0&&SS.ItemNum<TargetMenu.childElementCount){SS.MenuPos=parseInt(SS.MenuPos)-MoveMenu;SS.ItemNum=parseInt(SS.ItemNum)+1;SelectionMenuOFF();UpdateMenu();}}
+</script>
+</body>
+</html>
